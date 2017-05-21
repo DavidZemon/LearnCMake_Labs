@@ -1,0 +1,8 @@
+add_library(useless useless.cpp messages.cpp)
+target_include_directories(useless PRIVATE "${CMAKE_CURRENT_LIST_DIR}")
+target_include_directories(useless PUBLIC "${PROJECT_SOURCE_DIR}/include")
+if (LOWER STREQUAL FORCE_CASE)
+    target_link_libraries(useless lower)
+elseif (UPPER STREQUAL FORCE_CASE)
+    target_link_libraries(useless upper)
+endif ()

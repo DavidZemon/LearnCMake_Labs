@@ -10,7 +10,11 @@ if (WARN_ALL)
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wextra")
 endif ()
 
-add_subdirectory(upper)
-add_subdirectory(lower)
-add_subdirectory(useless)
-add_subdirectory(hello)
+set(SUB_DIRECTORIES
+    upper
+    lower
+    useless
+    hello)
+foreach(dir IN LISTS SUB_DIRECTORIES)
+    add_subdirectory("${dir}")
+endforeach()

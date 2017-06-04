@@ -20,6 +20,18 @@ add_custom_target(my_install
     WORKING_DIRECTORY "${INSTALL_ROOT_PARENT}"
     DEPENDS install_headers)
 
+# Find the reverse library
+find_path(REVERSE_ROOT include/reverse.h
+    HINTS "$ENV{HOME}/software/reverse")
+if (REVERSE_ROOT)
+    find_path(REVERSE_INCLUDE_DIR reverse.h
+        HINTS "${REVERSE_ROOT}/include")
+    find_library(REVERSE_LIBRARY reverse
+        HINTS "${REVERSE_ROOT}/lib")
+else ()
+    message(FATAL_ERROR "Could not find reverse library")
+endif ()
+
 set(SUB_DIRECTORIES
     upper
     lower

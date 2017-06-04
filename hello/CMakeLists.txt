@@ -1,5 +1,6 @@
 add_executable(HelloWorld main.cpp)
-target_link_libraries(HelloWorld useless)
+target_link_libraries(HelloWorld useless "${REVERSE_LIBRARY}")
+target_include_directories(HelloWorld PRIVATE "${REVERSE_INCLUDE_DIR}")
 
 add_custom_target(install_hello
     COMMAND "${CMAKE_COMMAND}" -E make_directory "${INSTALL_ROOT}/bin"

@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
+set(CMAKE_PREFIX_PATH "$ENV{HOME}/software/reverse")
 project(LearnCMake)
 
 option(WARN_ALL "Throw warnings when you write dumb code" ON)
@@ -20,17 +21,7 @@ add_custom_target(my_install
     WORKING_DIRECTORY "${INSTALL_ROOT_PARENT}"
     DEPENDS install_headers)
 
-# Find the reverse library
-find_path(REVERSE_ROOT include/reverse.h
-    HINTS "$ENV{HOME}/software/reverse")
-if (REVERSE_ROOT)
-    find_path(REVERSE_INCLUDE_DIR reverse.h
-        HINTS "${REVERSE_ROOT}/include")
-    find_library(REVERSE_LIBRARY reverse
-        HINTS "${REVERSE_ROOT}/lib")
-else ()
-    message(FATAL_ERROR "Could not find reverse library")
-endif ()
+find_package(reverse REQUIRED)
 
 set(SUB_DIRECTORIES
     upper
